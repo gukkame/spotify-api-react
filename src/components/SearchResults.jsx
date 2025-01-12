@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { fetchToken } from "../helpers/cookies.js";
 
 const SearchResults = ({ query }) => {
     const [results, setResults] = useState([]);
     const [searchType, setSearchType] = useState("album"); // Default search type
+    const [token, setToken] = useState();
 
     const fetchData = async (type) => {
+        if (!token) {
+            console.log("No token found ");
+            return;
+        }
         if (!query) {
             query = "Hello";
         }
-        console.log(
-            `https://api.spotify.com/v1/search?q=${encodeURIComponent(
-                query
-            )}&type=${type}`
-        );
-
         try {
             const response = await axios.get(
                 `https://api.spotify.com/v1/search?q=${encodeURIComponent(
@@ -22,9 +22,7 @@ const SearchResults = ({ query }) => {
                 )}&type=${type}`,
                 {
                     headers: {
-                        Authorization: `Bearer ${
-                            import.meta.env.VITE_SPOTIFY_TOKEN
-                        }`,
+                        Authorization: `Bearer ${token}`,
                     },
                 }
             );
@@ -37,29 +35,31 @@ const SearchResults = ({ query }) => {
             console.error("Error fetching data from Spotify API", error);
         }
     };
+    useEffect(() => {
+        fetchToken().then((token) => setToken(token));
+    }, []);
 
     useEffect(() => {
         setResults([]);
         fetchData(searchType);
-    }, [query, searchType]);
+    }, [token, query, searchType]);
 
     return (
-        <div className="max-w-xl flex flex-col items-center gap-4">
+        <div className="max-w-lg flex flex-col items-center gap-4">
             <div className="flex gap-4">
                 <button
                     onClick={() => setSearchType("album")}
-                    className={searchType === "album" ? "active" : ""}
+                    className={searchType === "album" ? "active  ring-2 ring-current" : ""}
                 >
                     Albums
                 </button>
                 <button
                     onClick={() => setSearchType("artist")}
-                    className={searchType === "artist" ? "active" : ""}
+                    className={searchType === "artist" ? "active ring-2 ring-current" : ""}
                 >
                     Artists
                 </button>
             </div>
-            <button onClick={() => fetchData(searchType)}>Test spotify</button>
             {results.length === 0 ? null : (
                 <div className="flex flex-col gap-4">
                     {results.map((item) =>
@@ -81,6 +81,17 @@ const SearchResults = ({ query }) => {
                                             .join(", ")}
                                     </p>
                                 </div>
+                                <div className="star ml-auto aspect-square">
+                                    <input
+                                        type="checkbox"
+                                        className="hidden"
+                                        id={`star-${item.uri}`}
+                                    />
+                                    <label
+                                        className="inline-block relative cursor-pointer"
+                                        htmlFor={`star-${item.uri}`}
+                                    ></label>
+                                </div>
                             </div>
                         ) : (
                             <div
@@ -100,18 +111,16 @@ const SearchResults = ({ query }) => {
                                             .join(", ")}
                                     </p>
                                 </div>
-                                <div className="ml-auto aspect-square">
-                                    <div className="star">
-                                        <input
-                                            type="checkbox"
-                                            className="hidden"
-                                            id={`star-${item.uri}`}
-                                        />
-                                        <label
-                                            className="inline-block relative cursor-pointer"
-                                            htmlFor={`star-${item.uri}`}
-                                        ></label>
-                                    </div>
+                                <div className="star ml-auto aspect-square">
+                                    <input
+                                        type="checkbox"
+                                        className="hidden"
+                                        id={`star-${item.uri}`}
+                                    />
+                                    <label
+                                        className="inline-block relative cursor-pointer"
+                                        htmlFor={`star-${item.uri}`}
+                                    ></label>
                                 </div>
                             </div>
                         )

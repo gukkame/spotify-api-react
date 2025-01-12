@@ -40,12 +40,12 @@ const Switch = ({ onToggle, onQueryChange }) => {
             <div
                 className={`w-10 h-10 rounded-full shadow-lg transition-transform transform duration-500 flex items-center justify-center ${
                     isToggled
-                        ? "translate-x-[245px] bg-gradient-to-r from-yellow-500 to-yellow-700 shadow-inner"
-                        : "translate-x-0 bg-gradient-to-r from-green-500 to-green-700 shadow-lg"
+                        ? "translate-x-[245px] bg-gradient-to-r from-green-500 to-green-700 shadow-inner"
+                        : "translate-x-0 bg-gradient-to-r from-yellow-500 to-yellow-700 shadow-lg"
                 }`}
                 onClick={handleToggle}
             >
-                {isToggled ? (
+                {!isToggled ? (
                     <img
                         src="src/assets/star-icon.png"
                         alt="Favourite Icon"

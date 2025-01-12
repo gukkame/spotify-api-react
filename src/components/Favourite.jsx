@@ -13,6 +13,7 @@ const Favourite = ({ favouriteArtists }) => {
         <div>
           {favouriteArtists.length > 0 ? (
             <>
+            
               <ul className="list-disc list-inside">
                 {favouriteArtists.map((artist, index) => (
                   <li key={index}>{artist}</li>

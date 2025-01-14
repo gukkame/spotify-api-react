@@ -1,5 +1,4 @@
 import SearchResults from "../components/SearchResults.jsx";
-import Favourite from "../components/Favourite.jsx";
 import React, { useState } from "react";
 import Switch from "../components/Switch.jsx";
 
@@ -7,11 +6,17 @@ const Home = () => {
     const [query, setQuery] = useState("");
     const [isToggled, setIsToggled] = useState(false);
 
+    /**
+     * Handles changes to the query input.
+     * @param {string} newQuery - The new query value.
+     */
     const handleQueryChange = (newQuery) => {
-        console.log("Query changed to", newQuery);
-
         setQuery(newQuery);
     };
+
+    /**
+     * Toggles the toggled state.
+     */
     const handleToggle = () => {
         setIsToggled(!isToggled);
     };
@@ -23,7 +28,7 @@ const Home = () => {
                     onToggle={handleToggle}
                     onQueryChange={handleQueryChange}
                 />
-                {isToggled ? <Favourite /> : <SearchResults query={query} />}
+                <SearchResults query={query} showFavorites={isToggled} />
             </div>
         </div>
     );

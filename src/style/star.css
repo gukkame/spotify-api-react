@@ -21,7 +21,6 @@
     text-shadow: 0 0 15px #ff33ff;
 }
 
-.star input:checked+label:after,
 .star input:checked~label:after {
     content: "★";
     color: #F9BF3B;

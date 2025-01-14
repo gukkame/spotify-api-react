@@ -27,7 +27,7 @@ const Switch = ({ onToggle, onQueryChange }) => {
         >
             <div className="absolute left-1/2 transform -translate-x-1/2">
                 {isToggled ? (
-                    <h2 className="text-yellow-500">Favorīti</h2>
+                    <h2 className="text-green-500">Favorīti</h2>
                 ) : (
                     <input
                         type="text"

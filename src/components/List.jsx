@@ -57,7 +57,7 @@ const List = ({ query, showFavorites }) => {
     }, [token, showFavorites]);
 
     return (
-        <div className="max-w-lg flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-4">
             {results.length === 0 ? (
                 showFavorites ? (
                     <h3 className="opacity-70">
@@ -70,7 +70,7 @@ const List = ({ query, showFavorites }) => {
                     </h3>
                 )
             ) : (
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 mt-4">
                     {results.map((item) => (
                         <ListItem
                             key={item.id}

@@ -39,7 +39,11 @@ const ListItem = ({ item }) => {
     }, []);
 
     return (
-        <div className="flex flex-row items-center gap-4">
+        <a
+            className="flex flex-row items-center w-lg gap-5 py-3 px-4 rounded-lg border border-transparent hover:border-white bg-dark-grey cursor-pointer transition duration-200 ease-in-out"
+            target="_blank"
+            href={item.external_urls.spotify}
+        >
             {item.type === "track" ? (
                 <img
                     src={item.album.images[0]?.url}
@@ -67,7 +71,7 @@ const ListItem = ({ item }) => {
                     htmlFor={`star-${item.uri}`}
                 ></label>
             </div>
-        </div>
+        </a>
     );
 };
 

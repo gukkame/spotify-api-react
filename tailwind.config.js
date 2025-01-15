@@ -3,9 +3,12 @@ module.exports = {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
         extend: {
-            width: {
-                640: "640px",
+            colors: {
+                "dark-grey": "#1a1a1a",
             },
+            width: {
+                "lg": "32rem"
+            }
         },
     },
     plugins: [],

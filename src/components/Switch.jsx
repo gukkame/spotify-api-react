@@ -28,7 +28,7 @@ const Switch = ({ onToggle, onQueryChange }) => {
 
     return (
         <div
-            className="w-80 h-12 flex items-center rounded-full cursor-pointer transition-all duration-300 shadow-2xl border border-gray-300 relative"
+            className="w-80 h-12 flex items-center rounded-full cursor-pointer transition-all duration-300 shadow-2xl border-2 border-gray-300 relative"
             tabIndex="0"
         >
             <div className="absolute left-1/2 transform -translate-x-1/2">
@@ -47,7 +47,7 @@ const Switch = ({ onToggle, onQueryChange }) => {
                 className={`w-11 h-11 rounded-full shadow-lg transition-transform transform duration-500 flex items-center justify-center ${
                     isToggled
                         ? "translate-x-[273px] bg-gradient-to-r from-green-500 to-green-700 shadow-inner"
-                        : "translate-x-0 bg-gradient-to-r from-yellow-500 to-yellow-700 shadow-lg"
+                        : "translate-x-[0px] bg-gradient-to-r from-yellow-500 to-yellow-700 shadow-lg"
                 }`}
                 onClick={handleToggle}
             >

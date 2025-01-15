@@ -66,7 +66,8 @@ const List = ({ query, showFavorites }) => {
                     </h3>
                 ) : (
                     <h3 className="opacity-70">
-                        Ievadiet meklētājā dziesmu, albūmu vai izpildītāju
+                        Ievadiet meklētājā dziesmu, albūmu vai izpildītāju un
+                        spied 'Enter'
                     </h3>
                 )
             ) : (

@@ -22,14 +22,10 @@ const Home = () => {
     };
 
     return (
-        <div className="flex justify-center items-top mt-32 min-h-screen">
-            <div className="flex flex-col items-center space-y-8">
-                <Switch
-                    onToggle={handleToggle}
-                    onQueryChange={handleQueryChange}
-                />
-                <List query={query} showFavorites={isToggled} />
-            </div>
+        <div className="flex flex-col justify-center mt-20 items-center gap-8">
+            <h2 className="text-4xl mb-4 text-gray-300">Spotify API Meklētājs</h2>
+            <Switch onToggle={handleToggle} onQueryChange={handleQueryChange} />
+            <List query={query} showFavorites={isToggled} />
         </div>
     );
 };

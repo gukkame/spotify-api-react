@@ -60,12 +60,12 @@ const List = ({ query, showFavorites }) => {
         <div className="max-w-lg flex flex-col items-center gap-4">
             {results.length === 0 ? (
                 showFavorites ? (
-                    <h3 className="mt-12 opacity-70">
+                    <h3 className="opacity-70">
                         Neviena dziesma, albums vai izpildītājs nav saglabāts kā
                         iecienītākais
                     </h3>
                 ) : (
-                    <h3 className="mt-12 opacity-70">
+                    <h3 className="opacity-70">
                         Ievadiet meklētājā dziesmu, albūmu vai izpildītāju
                     </h3>
                 )

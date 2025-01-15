@@ -28,7 +28,7 @@ const Switch = ({ onToggle, onQueryChange }) => {
 
     return (
         <div
-            className="w-80 h-12 flex items-center rounded-full cursor-pointer transition-all duration-300 shadow-2xl border-2 border-gray-300 relative"
+            className="w-80 h-12 mb-3 flex items-center rounded-full cursor-pointer transition-all duration-300 shadow-2xl border-2 border-gray-300 relative"
             tabIndex="0"
         >
             <div className="absolute left-1/2 transform -translate-x-1/2">

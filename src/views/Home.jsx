@@ -1,4 +1,4 @@
-import SearchResults from "../components/SearchResults.jsx";
+import List from "../components/List.jsx";
 import React, { useState } from "react";
 import Switch from "../components/Switch.jsx";
 
@@ -28,7 +28,7 @@ const Home = () => {
                     onToggle={handleToggle}
                     onQueryChange={handleQueryChange}
                 />
-                <SearchResults query={query} showFavorites={isToggled} />
+                <List query={query} showFavorites={isToggled} />
             </div>
         </div>
     );

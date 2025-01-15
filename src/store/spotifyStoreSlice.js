@@ -3,37 +3,24 @@ import { createSlice } from "@reduxjs/toolkit";
 const spotifyStoreSlice = createSlice({
     name: "spotifyStoreSlice",
     initialState: {
-        favoriteArtists: [],
-        favoriteAlbums: [],
+        favoriteItems: [],
     },
     reducers: {
-        addFavoriteArtist(state, artist) {
-            if (!state.favoriteArtists.includes(artist.payload.uri)) {
-                state.favoriteArtists.push(artist.payload);
+        addToFavorite(state, item) {
+            if (!state.favoriteItems.includes(item.payload.uri)) {
+                state.favoriteItems.push(item.payload);
             }
         },
-        addFavoriteAlbum(state, album) {
-            if (!state.favoriteAlbums.includes(album.payload.uri)) {
-                state.favoriteAlbums.push(album.payload);
-            }
-        },
-        deleteFavoriteArtist(state, artist) {
-            state.favoriteArtists = state.favoriteArtists.filter(
-                (favoriteArtist) => favoriteArtist.uri !== artist.payload.uri
-            );
-        },
-        deleteFavoriteAlbum(state, album) {
-            state.favoriteAlbums = state.favoriteAlbums.filter(
-                (favoriteAlbum) => favoriteAlbum.uri !== album.payload.uri
+        deleteFromFavorite(state, item) {
+            state.favoriteItems = state.favoriteItems.filter(
+                (favoriteItem) => favoriteItem.uri !== item.payload.uri
             );
         },
     },
 });
 
 export const {
-    addFavoriteArtist,
-    addFavoriteAlbum,
-    deleteFavoriteArtist,
-    deleteFavoriteAlbum,
+    addToFavorite,
+    deleteFromFavorite,
 } = spotifyStoreSlice.actions;
 export default spotifyStoreSlice.reducer;

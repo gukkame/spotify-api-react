@@ -33,6 +33,8 @@ export async function fetchToken() {
         const { access_token } = response.data;
         document.cookie = `spotify_token=${access_token}; max-age=3600; path=/`;
 
+        console.log("token ", access_token);
+        
         return access_token;
     } catch (error) {
         console.error("Error fetching Spotify token", error);

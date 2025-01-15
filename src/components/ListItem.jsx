@@ -1,82 +1,58 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    addFavoriteArtist,
-    addFavoriteAlbum,
-    deleteFavoriteArtist,
-    deleteFavoriteAlbum,
+    addToFavorite,
+    deleteFromFavorite,
 } from "../store/spotifyStoreSlice.js";
 
-const ListItem = ({ item, searchType }) => {
+const ListItem = ({ item }) => {
     const dispatch = useDispatch();
-    const favoriteArtists = useSelector((state) => state.store.favoriteArtists);
-    const favoriteAlbums = useSelector((state) => state.store.favoriteAlbums);
-
+    const favoriteItems = useSelector((state) => state.store.favoriteItems);
     const [isFavorite, setIsFavorite] = useState(false);
 
     /**
-     * Toggles the favorite status of an item based on the current state.
+     * Toggles the favorite status of an item based on the current state
      */
     const toggleFavourite = () => {
-        const action = isFavorite
-            ? searchType === "album"
-                ? deleteFavoriteAlbum
-                : deleteFavoriteArtist
-            : searchType === "album"
-            ? addFavoriteAlbum
-            : addFavoriteArtist;
+        const action = isFavorite ? deleteFromFavorite : addToFavorite;
 
         dispatch(action(item));
         setIsFavorite(!isFavorite);
     };
 
     /**
-     * Checks if an artist is in the favorite artist list.
+     * Checks if an item is in the favorite list
      *
-     * @param {string} artistUri - The URI of the artist to check.
-     * @returns {boolean} True if the artist is in the favorites list, false otherwise.
+     * @param {string} itemUri - The URI of the item to check
+     * @returns {boolean} True if the item is in the favorites list, false otherwise
      */
-    const isArtistInFavoriteList = (artistUri) =>
-        !!favoriteArtists.find(
-            (favoriteArtist) => favoriteArtist.uri === artistUri
-        );
+    const isInFavoriteList = (itemUri) =>
+        !!favoriteItems.find((favoriteItems) => favoriteItems.uri === itemUri);
 
     /**
-     * Checks if an album is in the favorite albums list.
-     *
-     * @param {string} albumUri - The URI of the album to check.
-     * @returns {boolean} True if the album is in the favorites list, false otherwise.
-     */
-    const isAlbumInFavoriteList = (albumUri) =>
-        !!favoriteAlbums.find(
-            (favoriteAlbums) => favoriteAlbums.uri === albumUri
-        );
-
-    /**
-     * Updates the favorite status of an item based on the search type.
+     * Updates the favorite status of an item based on the search type
      */
     useEffect(() => {
-        const isFavoriteItem =
-            searchType === "album"
-                ? isAlbumInFavoriteList(item.uri)
-                : isArtistInFavoriteList(item.uri);
+        const isFavoriteItem = isInFavoriteList(item.uri);
 
         setIsFavorite(isFavoriteItem);
     }, []);
 
     return (
         <div className="flex flex-row items-center gap-4">
-            <img src={item.images[0]?.url} alt={item.name} width="50" />
+            {item.type === "track" ? (
+                <img
+                    src={item.album.images[0]?.url}
+                    alt={item.name}
+                    width="50"
+                />
+            ) : (
+                <img src={item.images[0]?.url} alt={item.name} width="50" />
+            )}
+
             <div className="flex flex-col">
                 <p>{item.name}</p>
-
-                {searchType === "album" ? (
-                    <p>
-                        {item.artists?.map((artist) => artist.name).join(", ")}
-                    </p>
-                ) : (
-                    <p>{item.genres?.map((genre) => genre).join(", ")}</p>
-                )}
+                <p>{item.type}</p>
             </div>
             <div className="star ml-auto aspect-square">
                 <input
